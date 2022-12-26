@@ -1,20 +1,40 @@
 import "./NewExpense.css";
+import {useState} from "react";
 
 export default function NewExpense(){
 
-    const titleHandleChange = (e) => {
-        console.log(e.target.value)
+    const[formData, setFormData] = useState({
+        title: "",
+        amount: "",
+        date: "",
+    })
+
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        setFormData(prevFormData => {
+            return {
+                ...prevFormData,
+                [name] : value
+            }
+        })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(formData)
     }
 
     return (
         <div className="new-expense">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="new-expense-controls">
                     <div className="new-expense-control">
                         <label>Title</label>
                         <input 
                             type="text"
-                            onChange={titleHandleChange}
+                            onChange={handleChange}
+                            name="title"
+                            value={formData.title}
                         />
                     </div>
                     <div className="new-expense-control">
@@ -23,6 +43,9 @@ export default function NewExpense(){
                             type="number" 
                             min="0.01/" 
                             step="0.01"
+                            onChange={handleChange}
+                            name="amount"
+                            value={formData.amount}
                         />
                     </div>
                     <div className="new-expense-control">
@@ -31,11 +54,14 @@ export default function NewExpense(){
                             type="date" 
                             min="2019-01-01" 
                             max="2022-12-31"
+                            onChange={handleChange}
+                            name="date"
+                            value={formData.date}
                         />
                     </div>
                 </div>
                 <div className="new-expense-actions">
-                    <button type="submit">Add Expense</button>
+                    <button>Add Expense</button>
                 </div>
             </form>
         </div>
