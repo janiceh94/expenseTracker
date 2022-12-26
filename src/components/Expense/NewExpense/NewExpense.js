@@ -1,13 +1,21 @@
 import "./NewExpense.css";
 
 export default function NewExpense(){
+
+    const titleHandleChange = (e) => {
+        console.log(e.target.value)
+    }
+
     return (
         <div className="new-expense">
             <form>
                 <div className="new-expense-controls">
                     <div className="new-expense-control">
                         <label>Title</label>
-                        <input type="text"/>
+                        <input 
+                            type="text"
+                            onChange={titleHandleChange}
+                        />
                     </div>
                     <div className="new-expense-control">
                         <label>Amount</label>
