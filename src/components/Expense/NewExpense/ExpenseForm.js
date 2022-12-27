@@ -1,28 +1,38 @@
 import "./ExpenseForm.css";
 import {useState} from "react";
 
-export default function ExpenseForm(){
+export default function ExpenseForm(props){
     
-    const[formData, setFormData] = useState({
-        title: "",
-        amount: "",
-        date: "",
-    })
+    const [title, setTitle] = useState('');
+    const [amount, setAmount] = useState('');
+    const [date, setDate] = useState('');
 
-    const handleChange = (e) => {
-        const {name, value} = e.target
-        setFormData(prevFormData => {
-            return {
-                ...prevFormData,
-                [name] : value
-            }
-        })
-    }
+    const handleTitle = (e) => {
+        setTitle(e.target.value);
+        };
+
+    const handleAmount = (e) => {
+        setAmount(e.target.value);
+        };
+
+    const handleDate = (e) => {
+        setDate(e.target.value);
+        };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(formData)
-    }
+        e.preventDefault();
+
+    const expenseData = {
+        title: title,
+        amount: amount,
+        date: new Date(date),
+    };
+
+    props.onSaveExpenseData(expenseData);
+    setTitle('');
+    setAmount('');
+    setDate('');
+    };
 
     return (
         <div>
@@ -32,9 +42,9 @@ export default function ExpenseForm(){
                         <label>Title</label>
                         <input 
                             type="text"
-                            onChange={handleChange}
+                            onChange={handleTitle}
                             name="title"
-                            value={formData.title}
+                            value={title}
                         />
                     </div>
                     <div className="new-expense-control">
@@ -43,9 +53,9 @@ export default function ExpenseForm(){
                             type="number" 
                             min="0.01/" 
                             step="0.01"
-                            onChange={handleChange}
+                            onChange={handleAmount}
                             name="amount"
-                            value={formData.amount}
+                            value={amount}
                         />
                     </div>
                     <div className="new-expense-control">
@@ -54,9 +64,9 @@ export default function ExpenseForm(){
                             type="date" 
                             min="2019-01-01" 
                             max="2022-12-31"
-                            onChange={handleChange}
+                            onChange={handleDate}
                             name="date"
-                            value={formData.date}
+                            value={date}
                         />
                     </div>
                 </div>
