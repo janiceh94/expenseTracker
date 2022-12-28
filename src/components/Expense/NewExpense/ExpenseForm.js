@@ -28,10 +28,10 @@ export default function ExpenseForm(props){
         date: new Date(date),
     };
 
-    props.onSaveExpenseData(expenseData);
-    setTitle('');
-    setAmount('');
-    setDate('');
+        props.onSaveExpenseData(expenseData);
+        setTitle('');
+        setAmount('');
+        setDate('');
     };
 
     return (
@@ -43,7 +43,6 @@ export default function ExpenseForm(props){
                         <input 
                             type="text"
                             onChange={handleTitle}
-                            name="title"
                             value={title}
                         />
                     </div>
@@ -51,10 +50,9 @@ export default function ExpenseForm(props){
                         <label>Amount</label>
                         <input 
                             type="number" 
-                            min="0.01/" 
+                            min="0.01" 
                             step="0.01"
                             onChange={handleAmount}
-                            name="amount"
                             value={amount}
                         />
                     </div>
@@ -65,7 +63,6 @@ export default function ExpenseForm(props){
                             min="2019-01-01" 
                             max="2022-12-31"
                             onChange={handleDate}
-                            name="date"
                             value={date}
                         />
                     </div>
