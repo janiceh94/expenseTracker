@@ -12,7 +12,13 @@ export default function Expenses(props){
         setFilteredYear(selectedYear);
       };
 
-    const expenseElements = props.items.map(expense => {
+    const filteredExpenses = props.items.filter(expense => {
+        return (
+            expense.date.getFullYear().toString() === filteredYear
+        )
+    })
+
+    const expenseElements = filteredExpenses.map(expense => {
         return (
             <ExpenseItem
                 key={expense.id}
