@@ -15,7 +15,7 @@ export default function Chart(props){
             {props.dataPoints.map(dataPoint => {
                 return (
                     <ChartBar 
-                        key={dataPoint.id}
+                        key={dataPoint.label}
                         value={dataPoint.value}
                         maxValue={totalMax}
                         label={dataPoint.label}
